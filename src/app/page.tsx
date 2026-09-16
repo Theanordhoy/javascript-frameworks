@@ -1,69 +1,71 @@
-import Image from "next/image";
+import React from "react";
+import Link from "next/link";
 
-export default function Home() {
+interface Product {
+  id: string;
+  image: { url: string; alt: string };
+  title: string;
+  price: number;
+  discountedPrice: number;
+  rating: number;
+}
+
+interface ApiResponse {
+  data: Product[];
+}
+
+export default async function ProductsPage() {
+  const response = await fetch("https://v2.api.noroff.dev/online-shop");
+
+  if (!response.ok) {
+    console.error("Failed to fetch products:", response.statusText);
+    return <p>Failed to load products. Please try again.</p>;
+  }
+
+  const result: ApiResponse = await response.json();
+  const products = result.data;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div>
+      <h1>Products</h1>
+
+      {products && products.length > 0 ? (
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {products.map((product) => {
+            const discount = Math.round(
+              ((product.price - product.discountedPrice) / product.price) * 100
+            );
+
+            return (
+              <li
+                key={product.id}
+                style={{
+                  marginBottom: "20px",
+                  padding: "10px",
+                }}
+              >
+                <h2>{product.title}</h2>
+                <img
+                  src={product.image.url}
+                  alt={product.image.alt || product.title}
+                  style={{ maxWidth: "200px", height: "auto" }}
+                />
+                {product.discountedPrice !== product.price && (
+                  <p>Discount:{discount}%</p>
+                )}
+                <p>Price: {product.price}</p>
+                {product.discountedPrice !== product.price && (
+                  <p>Discounted price: {product.discountedPrice}</p>
+                )}
+                <p>Rating: {product.rating}</p>
+                <Link href={`/products/${product.id}`}>See more</Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>No products found.</p>
+      )}
     </div>
   );
 }
