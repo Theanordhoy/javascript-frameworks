@@ -58,7 +58,7 @@ export default async function ProductsPage() {
                   <p>Discounted price: {product.discountedPrice}</p>
                 )}
                 <p>Rating: {product.rating}</p>
-                <Link href={`/products/${product.id}`}>See more</Link>
+                <Link href={`/product-detail/${product.id}`}>See more</Link>
               </li>
             );
           })}
