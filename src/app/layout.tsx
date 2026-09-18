@@ -31,39 +31,25 @@ export default function RootLayout({
     >
       <CartProvider>
         <body className="min-h-full flex flex-col">
-          <header>
-            <nav>
-              <Link href="/">Products</Link>{" "}
-              <Link href="/contact">Contact</Link>{" "}
-              <Link href="/cart">Cart</Link>
+          <header className="border-b border-gray-200 p-4 flex justify-center items-center">
+            <nav className="flex gap-6">
+              <Link href="/" className="hover:text-gray-600">
+                Products
+              </Link>{" "}
+              <Link href="/contact" className="hover:text-gray-600">
+                Contact
+              </Link>{" "}
+              <Link href="/cart" className="hover:text-gray-600">
+                Cart
+              </Link>
             </nav>
           </header>
-
-          <main>{children}</main>
-          <footer>
+          <main className="mx-auto w-full max-w-7xl px-4 py-8">{children}</main>
+          <footer className="border-t border-gray-200 p-4 text-center">
             <p>&copy; Online shop</p>
           </footer>
         </body>
       </CartProvider>
-      <body className="min-h-full flex flex-col">
-        <header className="border-b border-gray-200 p-4 flex justify-center items-center">
-          <nav className="flex gap-6">
-            <Link href="/" className="hover:text-gray-600">
-              Products
-            </Link>{" "}
-            <Link href="/contact" className="hover:text-gray-600">
-              Contact
-            </Link>{" "}
-            <Link href="/cart" className="hover:text-gray-600">
-              Cart
-            </Link>
-          </nav>
-        </header>
-        <main className="mx-auto w-full max-w-7xl px-4 py-8">{children}</main>
-        <footer className="border-t border-gray-200 p-4 text-center">
-          <p>&copy; Online shop</p>
-        </footer>
-      </body>
     </html>
   );
 }
