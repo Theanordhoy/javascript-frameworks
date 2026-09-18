@@ -30,5 +30,14 @@ export default function AddToCartButton({
     addToCart(product);
   };
 
-  return <button onClick={handleClick}>Add to cart</button>;
+  return (
+    <div className="mt-8 flex justify-center">
+      <button
+        onClick={handleClick}
+        className="rounded-lg bg-black px-16 py-3 text-white transition hover:bg-gray-800 text-lg cursor-pointer"
+      >
+        Add to cart
+      </button>
+    </div>
+  );
 }

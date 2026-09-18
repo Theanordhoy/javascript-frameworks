@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Search from "@/components/SearchBar";
 
 interface Product {
   id: string;
@@ -14,7 +15,11 @@ interface ApiResponse {
   data: Product[];
 }
 
-export default async function ProductsPage() {
+export default async function ProductsPage(props: {
+  searchParams?: Promise<{ query?: string; page?: string }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || "";
   const response = await fetch("https://v2.api.noroff.dev/online-shop");
 
   if (!response.ok) {
@@ -24,14 +29,21 @@ export default async function ProductsPage() {
 
   const result: ApiResponse = await response.json();
   const products = result.data;
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <div>
+      <div>
+        <Search placeholder="Search products..." />
+      </div>
+
       <h1>Products</h1>
 
-      {products && products.length > 0 ? (
+      {filteredProducts && filteredProducts.length > 0 ? (
         <ul style={{ listStyle: "none", padding: 0 }}>
-          {products.map((product) => {
+          {filteredProducts.map((product) => {
             const discount = Math.round(
               ((product.price - product.discountedPrice) / product.price) * 100
             );
@@ -51,7 +63,7 @@ export default async function ProductsPage() {
                   style={{ maxWidth: "200px", height: "auto" }}
                 />
                 {product.discountedPrice !== product.price && (
-                  <p>Discount:{discount}%</p>
+                  <p>{discount}%</p>
                 )}
                 <p>Price: {product.price}</p>
                 {product.discountedPrice !== product.price && (
