@@ -35,14 +35,17 @@ export default async function ProductsPage(props: {
 
   return (
     <div>
-      <div>
+      <div className="border border-gray-200 rounded-lg p-2 mb-4 mx-4">
         <Search placeholder="Search products..." />
       </div>
 
-      <h1>Products</h1>
+      <h1 className="mb-4 text-center">Products</h1>
 
       {filteredProducts && filteredProducts.length > 0 ? (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul
+          style={{ listStyle: "none", padding: 0 }}
+          className="flex flex-wrap gap-4 justify-center"
+        >
           {filteredProducts.map((product) => {
             const discount = Math.round(
               ((product.price - product.discountedPrice) / product.price) * 100
@@ -55,22 +58,44 @@ export default async function ProductsPage(props: {
                   marginBottom: "20px",
                   padding: "10px",
                 }}
+                className="border border-gray-200 rounded-lg shadow-md"
               >
-                <h2>{product.title}</h2>
-                <img
-                  src={product.image.url}
-                  alt={product.image.alt || product.title}
-                  style={{ maxWidth: "200px", height: "auto" }}
-                />
-                {product.discountedPrice !== product.price && (
-                  <p>{discount}%</p>
-                )}
-                <p>Price: {product.price}</p>
-                {product.discountedPrice !== product.price && (
-                  <p>Discounted price: {product.discountedPrice}</p>
-                )}
-                <p>Rating: {product.rating}</p>
-                <Link href={`/product-detail/${product.id}`}>See more</Link>
+                <h2 className="mb-2 font-semibold">{product.title}</h2>
+                <div className="relative">
+                  <img
+                    src={product.image.url}
+                    alt={product.image.alt || product.title}
+                    className="object-cover rounded-lg w-52 h-52"
+                  />
+                  {product.discountedPrice !== product.price && (
+                    <p className="absolute top-1 right-1 bg-red-700 p-2 rounded-lg">
+                      {discount}%
+                    </p>
+                  )}
+                </div>
+                <div className="flex gap-4 items-center mt-2">
+                  <p
+                    className={
+                      product.discountedPrice !== product.price
+                        ? "text-lg line-through text-gray-500"
+                        : "font-semibold"
+                    }
+                  >
+                    $ {product.price}
+                  </p>
+                  {product.discountedPrice !== product.price && (
+                    <p className="text-red-500 font-semibold">
+                      $ {product.discountedPrice}
+                    </p>
+                  )}
+                </div>
+                <p className="text-sm">Rating: {product.rating}/5</p>
+                <Link
+                  href={`/product-detail/${product.id}`}
+                  className="bg-green-800 p-2 rounded-lg text-white block text-center my-2 hover:bg-green-700"
+                >
+                  See more
+                </Link>
               </li>
             );
           })}
