@@ -1,28 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import AddToCartButton from "@/components/AddToCartButton";
-
-interface ProductDetailPage {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  discountedPrice: number;
-  image: {
-    url: string;
-    alt: string;
-  };
-  reviews: {
-    id: string;
-    username: string;
-    rating: number;
-    description: string;
-  }[];
-  tags: string[];
-}
+import { Product } from "@/types/product";
 
 interface ApiSingleResponse {
-  data: ProductDetailPage;
+  data: Product;
 }
 
 export default async function ProductDetailPage({
@@ -32,7 +14,6 @@ export default async function ProductDetailPage({
 }) {
   const { id } = await params;
   const productId = id;
-
   const response = await fetch(
     `https://v2.api.noroff.dev/online-shop/${productId}`,
     {
@@ -77,7 +58,7 @@ export default async function ProductDetailPage({
       <img src={product.image.url} alt={product.image.alt} />
       <h2>Reviews:</h2>
       <ul>
-        {product.reviews.map((review) => (
+        {product.reviews?.map((review) => (
           <li key={review.id}>
             <p>
               <strong>{review.username}</strong> - Rating: {review.rating}
@@ -88,13 +69,14 @@ export default async function ProductDetailPage({
       </ul>
       <h2>Tags:</h2>
       <ul>
-        {product.tags.map((tag, index) => (
+        {product.tags?.map((tag, index) => (
           <li key={index}>{tag}</li>
         ))}
       </ul>
       <AddToCartButton
         id={product.id}
         title={product.title}
+        image={product.image}
         price={product.price}
         discountedPrice={product.discountedPrice}
       />
