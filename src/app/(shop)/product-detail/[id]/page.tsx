@@ -60,7 +60,7 @@ export default async function ProductDetailPage({
   }
 
   return (
-    <div>
+    <div className="mx-auto">
       <Link
         href="/"
         style={{ display: "block", height: "auto", marginBottom: "20px" }}
@@ -68,36 +68,69 @@ export default async function ProductDetailPage({
         {" "}
         &larr; Back to products{" "}
       </Link>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <p>{product.price}</p>
-      {product.discountedPrice !== product.price && (
-        <p>Discounted price: {product.discountedPrice}</p>
-      )}
-      <img src={product.image.url} alt={product.image.alt} />
-      <h2>Reviews:</h2>
-      <ul>
-        {product.reviews.map((review) => (
-          <li key={review.id}>
-            <p>
-              <strong>{review.username}</strong> - Rating: {review.rating}
-            </p>
-            <p>{review.description} </p>
-          </li>
-        ))}
-      </ul>
-      <h2>Tags:</h2>
-      <ul>
-        {product.tags.map((tag, index) => (
-          <li key={index}>{tag}</li>
-        ))}
-      </ul>
-      <AddToCartButton
-        id={product.id}
-        title={product.title}
-        price={product.price}
-        discountedPrice={product.discountedPrice}
-      />
+      <div className="mx-auto max-w-2xl border border-gray-200 p-8 shadow-md rounded-lg">
+        <h1 className="mb-6 text-2xl font-bold text-center">{product.title}</h1>
+        <img
+          src={product.image.url}
+          alt={product.image.alt}
+          className="mx-auto block mb-6 h-80 w-80  rounded-xl object-cover"
+        />
+        <div className="space-y-4 mb-4">
+          <p>{product.description}</p>
+        </div>
+        <div className="flex items-center gap-4 justify-center">
+          <p
+            className={
+              product.discountedPrice !== product.price
+                ? "text-lg line-through text-gray-500"
+                : "text-lg font-semibold"
+            }
+          >
+            {product.price}
+          </p>
+
+          {product.discountedPrice !== product.price && (
+            <p className="text-lg text-red-500">{product.discountedPrice}</p>
+          )}
+        </div>
+        <div className="mt-4 ">
+          <ul className="flex flex-wrap justify-center gap-2">
+            {product.tags.map((tag, index) => (
+              <li
+                key={index}
+                className="bg-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <AddToCartButton
+          id={product.id}
+          title={product.title}
+          price={product.price}
+          discountedPrice={product.discountedPrice}
+        />
+        <div className="mt-8 border-t border-gray-200 pt-6">
+          <h2 className="mb-4 text-lg font-semibold">Reviews:</h2>
+          <ul className="space-y-4">
+            {product.reviews.map((review) => (
+              <li
+                key={review.id}
+                className="rounded-lg bg-gray-50 p-4 text-center"
+              >
+                <p>
+                  <strong>{review.username}</strong>
+                </p>
+                <p className="text-sm text-gray-600 mb-2">
+                  Rating: {review.rating}
+                </p>
+                <p className="text-gray-700">{review.description} </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
