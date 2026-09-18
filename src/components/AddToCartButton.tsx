@@ -1,29 +1,33 @@
 "use client";
 
-interface AddToCartButtonProps {
-  id: string;
-  title: string;
-  price: number;
-  discountedPrice: number;
-}
+import { useCart } from "@/context/CartContext";
+import { Product } from "@/types/product";
 
 export default function AddToCartButton({
   id,
   title,
+  description,
+  image,
   price,
   discountedPrice,
-}: AddToCartButtonProps) {
+  reviews,
+  tags,
+}: Product) {
+  const { addToCart, cart } = useCart();
+  console.log(cart);
   const handleClick = () => {
-    console.log("Button clicked!");
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    cart.push({
+    const product: Product = {
       id,
       title,
+      description,
+      image,
       price,
       discountedPrice,
-    });
-    localStorage.setItem("cart", JSON.stringify(cart));
+      reviews,
+      tags,
+    };
+
+    addToCart(product);
   };
 
   return (
