@@ -39,7 +39,6 @@ export default async function ProductDetailPage({
   if (!product) {
     return <p>Product is not available.</p>;
   }
-
   return (
     <div className="mx-auto">
       <Link
@@ -49,37 +48,6 @@ export default async function ProductDetailPage({
         {" "}
         &larr; Back to products{" "}
       </Link>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <p>{product.price}</p>
-      {product.discountedPrice !== product.price && (
-        <p>Discounted price: {product.discountedPrice}</p>
-      )}
-      <img src={product.image.url} alt={product.image.alt} />
-      <h2>Reviews:</h2>
-      <ul>
-        {product.reviews?.map((review) => (
-          <li key={review.id}>
-            <p>
-              <strong>{review.username}</strong> - Rating: {review.rating}
-            </p>
-            <p>{review.description} </p>
-          </li>
-        ))}
-      </ul>
-      <h2>Tags:</h2>
-      <ul>
-        {product.tags?.map((tag, index) => (
-          <li key={index}>{tag}</li>
-        ))}
-      </ul>
-      <AddToCartButton
-        id={product.id}
-        title={product.title}
-        image={product.image}
-        price={product.price}
-        discountedPrice={product.discountedPrice}
-      />
       <div className="mx-auto max-w-2xl border border-gray-200 p-8 shadow-md rounded-lg">
         <h1 className="mb-6 text-2xl font-bold text-center">{product.title}</h1>
         <img
@@ -107,7 +75,7 @@ export default async function ProductDetailPage({
         </div>
         <div className="mt-4 ">
           <ul className="flex flex-wrap justify-center gap-2">
-            {product.tags.map((tag, index) => (
+            {product.tags?.map((tag, index) => (
               <li
                 key={index}
                 className="bg-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm"
@@ -120,13 +88,14 @@ export default async function ProductDetailPage({
         <AddToCartButton
           id={product.id}
           title={product.title}
+          image={product.image}
           price={product.price}
           discountedPrice={product.discountedPrice}
         />
         <div className="mt-8 border-t border-gray-200 pt-6">
           <h2 className="mb-4 text-lg font-semibold">Reviews:</h2>
           <ul className="space-y-4">
-            {product.reviews.map((review) => (
+            {product.reviews?.map((review) => (
               <li
                 key={review.id}
                 className="rounded-lg bg-gray-50 p-4 text-center"
