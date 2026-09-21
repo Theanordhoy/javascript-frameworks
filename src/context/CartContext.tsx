@@ -18,6 +18,7 @@ type CartItem = Product & { quantity: number };
 //                 decreaseQuantity, clearCart
 interface CartContextType {
   cart: CartItem[];
+  cartCount: number;
   addToCart: (product: Product) => void;
   removeFromCart: (id: string) => void;
   increaseQuantity: (id: string) => void;
@@ -94,15 +95,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const clearCart = () => setCart([]);
+
   //    7e. Derived values (calculated, not stored in state):
   //        - cartCount = sum of quantities
-  //        - cartTotal = sum of price x quantity
+  const cartCount = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
 
+    //        - cartTotal = sum of price x quantity
+  );
+  console.log("CartProvider rendered", cartCount);
   //    7f. Return the Provider with all of the above as value, wrapping children
   return (
     <CartContext.Provider
       value={{
         cart,
+        cartCount,
         addToCart,
         removeFromCart,
         increaseQuantity,
