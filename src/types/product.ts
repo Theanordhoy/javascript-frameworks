@@ -8,6 +8,7 @@ export interface Product {
     url: string;
     alt: string;
   };
+  rating?: number;
   reviews?: {
     id: string;
     username: string;

@@ -1,15 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Search from "@/components/SearchBar";
-
-interface Product {
-  id: string;
-  image: { url: string; alt: string };
-  title: string;
-  price: number;
-  discountedPrice: number;
-  rating: number;
-}
+import { Product } from "@/types/product";
 
 interface ApiResponse {
   data: Product[];
