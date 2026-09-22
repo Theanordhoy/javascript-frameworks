@@ -27,16 +27,16 @@ export default async function ProductsPage(props: {
 
   return (
     <div>
-      <div className="border border-gray-200 rounded-lg p-2 mb-4 mx-4">
+      <div>
         <Search placeholder="Search products..." />
       </div>
 
-      <h1 className="mb-4 text-center">Products</h1>
+      <h1 className="mb-6 text-2xl font-bold text-center">Products</h1>
 
       {filteredProducts && filteredProducts.length > 0 ? (
         <ul
           style={{ listStyle: "none", padding: 0 }}
-          className="flex flex-wrap gap-4 justify-center"
+          className="flex flex-wrap gap-10 justify-center"
         >
           {filteredProducts.map((product) => {
             const discount = Math.round(
@@ -60,7 +60,7 @@ export default async function ProductsPage(props: {
                     className="object-cover rounded-lg w-52 h-52"
                   />
                   {product.discountedPrice !== product.price && (
-                    <p className="absolute top-1 right-1 bg-red-700 p-2 rounded-lg">
+                    <p className="absolute top-1 right-1 text-white font-semibold bg-red-700 p-2 rounded-lg">
                       {discount}%
                     </p>
                   )}
@@ -69,14 +69,14 @@ export default async function ProductsPage(props: {
                   <p
                     className={
                       product.discountedPrice !== product.price
-                        ? "text-lg line-through text-gray-500"
-                        : "font-semibold"
+                        ? " line-through text-gray-500"
+                        : "font-semibold text-lg"
                     }
                   >
                     $ {product.price}
                   </p>
                   {product.discountedPrice !== product.price && (
-                    <p className="text-red-500 font-semibold">
+                    <p className="text-red-500 text-lg font-semibold">
                       $ {product.discountedPrice}
                     </p>
                   )}
@@ -84,7 +84,7 @@ export default async function ProductsPage(props: {
                 <p className="text-sm">Rating: {product.rating}/5</p>
                 <Link
                   href={`/product-detail/${product.id}`}
-                  className="bg-green-800 p-2 rounded-lg text-white block text-center my-2 hover:bg-green-700"
+                  className="bg-gray-800 border border-white p-2 rounded-lg text-white block text-center my-2 hover:bg-black"
                 >
                   See more
                 </Link>

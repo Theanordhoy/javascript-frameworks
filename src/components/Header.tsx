@@ -8,8 +8,11 @@ export default function Header() {
   const { cartCount } = useCart();
 
   return (
-    <header className="border-b border-gray-200 p-4 flex justify-center items-center">
-      <nav className="flex gap-6">
+    <header className="border-b border-gray-200 py-4 px-6 flex justify-between items-center">
+      <div>
+        <p className="font-semibold">E&T</p>
+      </div>
+      <nav className="flex items-center text-lg gap-6">
         <Link href="/" className="hover:text-gray-600">
           Products
         </Link>{" "}

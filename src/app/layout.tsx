@@ -34,7 +34,7 @@ export default function RootLayout({
           <Header />
           <main className="mx-auto w-full max-w-7xl px-4 py-8">{children}</main>
           <footer className="border-t border-gray-200 p-4 text-center">
-            <p>&copy; Online shop</p>
+            <p>&copy; E&T Online shop</p>
           </footer>
         </body>
       </CartProvider>
