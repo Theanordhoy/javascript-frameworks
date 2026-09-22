@@ -22,7 +22,7 @@ export default async function ProductsPage(props: {
   const result: ApiResponse = await response.json();
   const products = result.data;
   const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(query.toLowerCase())
+    product.title.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
@@ -40,7 +40,7 @@ export default async function ProductsPage(props: {
         >
           {filteredProducts.map((product) => {
             const discount = Math.round(
-              ((product.price - product.discountedPrice) / product.price) * 100
+              ((product.price - product.discountedPrice) / product.price) * 100,
             );
 
             return (
@@ -60,7 +60,7 @@ export default async function ProductsPage(props: {
                     className="object-cover rounded-lg w-52 h-52"
                   />
                   {product.discountedPrice !== product.price && (
-                    <p className="absolute top-1 right-1 text-white font-semibold bg-red-700 p-2 rounded-lg">
+                    <p className="absolute top-1 right-1 text-white font-semibold bg-red-800 p-1.5 rounded-lg">
                       {discount}%
                     </p>
                   )}
@@ -76,7 +76,7 @@ export default async function ProductsPage(props: {
                     $ {product.price}
                   </p>
                   {product.discountedPrice !== product.price && (
-                    <p className="text-red-500 text-lg font-semibold">
+                    <p className="text-red-700 text-lg font-semibold">
                       $ {product.discountedPrice}
                     </p>
                   )}

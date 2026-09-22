@@ -18,7 +18,7 @@ export default async function ProductDetailPage({
     `https://v2.api.noroff.dev/online-shop/${productId}`,
     {
       next: { revalidate: 3600 },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -28,7 +28,7 @@ export default async function ProductDetailPage({
     }
     console.error(
       `Failed to fetch product ${productId}: `,
-      response.statusText
+      response.statusText,
     );
     return <p>Could not fetch product data. Try again later.</p>;
   }
@@ -50,7 +50,7 @@ export default async function ProductDetailPage({
         <img
           src={product.image.url}
           alt={product.image.alt}
-          className="mx-auto block mb-4 h-140 w-140 rounded-xl object-cover"
+          className="mx-auto block h-70 w-70 mb-4 rounded-xl object-cover md:h-140 md:w-140"
         />
         <div className="text-center space-y-4 mb-4">
           <p>{product.description}</p>
@@ -67,7 +67,7 @@ export default async function ProductDetailPage({
           </p>
 
           {product.discountedPrice !== product.price && (
-            <p className="text-xl font-semibold text-red-500">
+            <p className="text-xl font-semibold text-red-700">
               $ {product.discountedPrice}
             </p>
           )}

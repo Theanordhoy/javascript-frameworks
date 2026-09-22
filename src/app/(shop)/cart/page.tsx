@@ -40,10 +40,10 @@ export default function CartPage() {
                 return (
                   <li
                     key={item.id}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 p-6 shadow-md"
+                    className="flex flex-col md:flex-row items-center justify-between rounded-lg border border-gray-200 p-6 shadow-md"
                   >
                     {/* Left side */}
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-6 mb-6 md:mb-0">
                       <img
                         src={item.image.url}
                         alt={item.image.alt}
@@ -62,7 +62,7 @@ export default function CartPage() {
                       <div className="flex rounded-lg border border-gray-300">
                         <button
                           onClick={() => decreaseQuantity(item.id)}
-                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          className="px-4 py-2 hover:bg-gray-100 hover:text-black cursor-pointer"
                         >
                           -
                         </button>
@@ -71,14 +71,14 @@ export default function CartPage() {
                         </p>
                         <button
                           onClick={() => increaseQuantity(item.id)}
-                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          className="px-4 py-2 hover:bg-gray-100 hover:text-black cursor-pointer"
                         >
                           +
                         </button>
                       </div>
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="rounded-lg border border-red-500 px-5 py-2 text-sm text-red-500 hover:bg-red-50 cursor-pointer"
+                        className="rounded-lg border border-red-700 px-5 py-2 text-sm text-red-700 hover:bg-red-50 cursor-pointer"
                       >
                         Remove item
                       </button>
@@ -95,7 +95,7 @@ export default function CartPage() {
                   $ {totalPrice.toFixed(2)}
                 </p>
               </div>
-              <div className="flex gap-4 m-4">
+              <div className="flex flex-col md:flex-row gap-4 m-4">
                 <button
                   onClick={() => clearCart()}
                   className="flex-1 rounded-lg border border-gray-300 px-6 py-3 hover:bg-gray-100 hover:text-black font-semibold cursor-pointer"
