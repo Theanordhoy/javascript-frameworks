@@ -34,7 +34,7 @@ export default function AddToCartButton({
     <div className="mt-8 flex justify-center">
       <button
         onClick={handleClick}
-        className="rounded-lg bg-black px-16 py-3 text-white transition hover:bg-gray-800 text-lg cursor-pointer"
+        className="rounded-lg border border-white bg-gray-800 px-16 py-3 text-white transition hover:bg-black text-lg cursor-pointer"
       >
         Add to cart
       </button>

@@ -18,7 +18,7 @@ export default async function ProductDetailPage({
     `https://v2.api.noroff.dev/online-shop/${productId}`,
     {
       next: { revalidate: 3600 },
-    },
+    }
   );
 
   if (!response.ok) {
@@ -28,7 +28,7 @@ export default async function ProductDetailPage({
     }
     console.error(
       `Failed to fetch product ${productId}: `,
-      response.statusText,
+      response.statusText
     );
     return <p>Could not fetch product data. Try again later.</p>;
   }
@@ -41,39 +41,38 @@ export default async function ProductDetailPage({
   }
   return (
     <div className="mx-auto">
-      <Link
-        href="/"
-        style={{ display: "block", height: "auto", marginBottom: "20px" }}
-      >
+      <Link href="/" className="text-sm block h-auto mb-5">
         {" "}
         &larr; Back to products{" "}
       </Link>
       <div className="mx-auto max-w-2xl border border-gray-200 p-8 shadow-md rounded-lg">
-        <h1 className="mb-6 text-2xl font-bold text-center">{product.title}</h1>
+        <h1 className="mb-3 text-2xl font-bold text-center">{product.title}</h1>
         <img
           src={product.image.url}
           alt={product.image.alt}
-          className="mx-auto block mb-6 h-80 w-80  rounded-xl object-cover"
+          className="mx-auto block mb-4 h-140 w-140 rounded-xl object-cover"
         />
-        <div className="space-y-4 mb-4">
+        <div className="text-center space-y-4 mb-4">
           <p>{product.description}</p>
         </div>
         <div className="flex items-center gap-4 justify-center">
           <p
             className={
               product.discountedPrice !== product.price
-                ? "text-lg line-through text-gray-500"
-                : "text-lg font-semibold"
+                ? " line-through text-gray-500"
+                : "text-xl font-semibold"
             }
           >
-            {product.price}
+            $ {product.price}
           </p>
 
           {product.discountedPrice !== product.price && (
-            <p className="text-lg text-red-500">{product.discountedPrice}</p>
+            <p className="text-xl font-semibold text-red-500">
+              $ {product.discountedPrice}
+            </p>
           )}
         </div>
-        <div className="mt-4 ">
+        <div className="mt-2 ">
           <ul className="flex flex-wrap justify-center gap-2">
             {product.tags?.map((tag, index) => (
               <li
@@ -100,11 +99,11 @@ export default async function ProductDetailPage({
                 key={review.id}
                 className="rounded-lg bg-gray-50 p-4 text-center"
               >
-                <p>
+                <p className="text-black mb-2">
                   <strong>{review.username}</strong>
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Rating: {review.rating}
+                  Rating: {review.rating}/5
                 </p>
                 <p className="text-gray-700">{review.description} </p>
               </li>
