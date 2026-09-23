@@ -66,7 +66,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item,
+            : item
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -79,8 +79,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const increaseQuantity = (id: string) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
     );
   };
 
@@ -88,9 +88,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         )
-        .filter((item) => item.quantity > 0),
+        .filter((item) => item.quantity > 0)
     );
   };
 
@@ -100,11 +100,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   //        - cartCount = sum of quantities
   const cartCount = cart.reduce(
     (sum, item) => sum + item.quantity,
-    0,
+    0
 
     //        - cartTotal = sum of price x quantity
   );
-  console.log("CartProvider rendered", cartCount);
   //    7f. Return the Provider with all of the above as value, wrapping children
   return (
     <CartContext.Provider
