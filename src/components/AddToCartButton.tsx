@@ -2,6 +2,7 @@
 
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/product";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AddToCartButton({
   id,
@@ -13,8 +14,7 @@ export default function AddToCartButton({
   reviews,
   tags,
 }: Product) {
-  const { addToCart, cart } = useCart();
-  console.log(cart);
+  const { addToCart } = useCart();
   const handleClick = () => {
     const product: Product = {
       id,
@@ -28,6 +28,9 @@ export default function AddToCartButton({
     };
 
     addToCart(product);
+    toast.success(`${product.title} added to cart!`, {
+      autoClose: 4000,
+    });
   };
 
   return (
@@ -38,6 +41,7 @@ export default function AddToCartButton({
       >
         Add to cart
       </button>
+      <ToastContainer />
     </div>
   );
 }
