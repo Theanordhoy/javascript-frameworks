@@ -21,8 +21,12 @@ export default async function ProductsPage(props: {
 
   const result: ApiResponse = await response.json();
   const products = result.data;
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(query.toLowerCase()),
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.tags?.some((tag) =>
+        tag.toLowerCase().includes(query.toLowerCase())
+      )
   );
 
   return (
@@ -40,7 +44,7 @@ export default async function ProductsPage(props: {
         >
           {filteredProducts.map((product) => {
             const discount = Math.round(
-              ((product.price - product.discountedPrice) / product.price) * 100,
+              ((product.price - product.discountedPrice) / product.price) * 100
             );
 
             return (
@@ -82,6 +86,18 @@ export default async function ProductsPage(props: {
                   )}
                 </div>
                 <p className="text-sm">Rating: {product.rating}/5</p>
+                <div className="my-3 ">
+                  <ul className="flex flex-wrap justify-end gap-2">
+                    {product.tags?.map((tag, index) => (
+                      <li
+                        key={index}
+                        className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-lg text-xs"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <Link
                   href={`/product-detail/${product.id}`}
                   className="bg-gray-800 border border-white p-2 rounded-lg text-white block text-center my-2 hover:bg-black"
