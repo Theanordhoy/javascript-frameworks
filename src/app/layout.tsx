@@ -32,7 +32,9 @@ export default function RootLayout({
       <CartProvider>
         <body className="min-h-full flex flex-col">
           <Header />
-          <main className="mx-auto w-full max-w-7xl px-4 py-8">{children}</main>
+          <main className="mx-auto w-full max-w-7xl px-4 py-8 min-h-screen">
+            {children}
+          </main>
           <footer className="border-t border-gray-200 p-4 text-center">
             <p>&copy; E&T Online shop</p>
           </footer>
