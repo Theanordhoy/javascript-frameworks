@@ -39,6 +39,7 @@ export default async function ProductDetailPage({
   if (!product) {
     return <p>Product is not available.</p>;
   }
+
   return (
     <div className="mx-auto">
       <Link href="/" className="text-sm block h-auto mb-5">
@@ -93,22 +94,28 @@ export default async function ProductDetailPage({
         />
         <div className="mt-8 border-t border-gray-200 pt-6">
           <h2 className="mb-4 text-lg font-semibold">Reviews:</h2>
-          <ul className="space-y-4">
-            {product.reviews?.map((review) => (
-              <li
-                key={review.id}
-                className="rounded-lg bg-gray-50 p-4 text-center"
-              >
-                <p className="text-black mb-2">
-                  <strong>{review.username}</strong>
-                </p>
-                <p className="text-sm text-gray-600 mb-2">
-                  Rating: {review.rating}/5
-                </p>
-                <p className="text-gray-700">{review.description} </p>
-              </li>
-            ))}
-          </ul>
+          {!product.reviews || product.reviews.length === 0 ? (
+            <p className="rounded-lg bg-gray-50 p-4 text-center text-lg">
+              No reviews yet.
+            </p>
+          ) : (
+            <ul className="space-y-4">
+              {product.reviews?.map((review) => (
+                <li
+                  key={review.id}
+                  className="rounded-lg bg-gray-50 p-4 text-center"
+                >
+                  <p className="text-black mb-2">
+                    <strong>{review.username}</strong>
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Rating: {review.rating}/5
+                  </p>
+                  <p className="text-gray-700">{review.description} </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
