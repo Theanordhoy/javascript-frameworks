@@ -42,6 +42,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CART_LOCAL_STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (stored) setCart(JSON.parse(stored));
     } catch {
       localStorage.removeItem(CART_LOCAL_STORAGE_KEY); // corrupted data: start fresh
@@ -66,7 +67,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -79,8 +80,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const increaseQuantity = (id: string) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   };
 
@@ -88,9 +89,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   };
 
@@ -98,12 +99,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   //    7e. Derived values (calculated, not stored in state):
   //        - cartCount = sum of quantities
-  const cartCount = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-
-    //        - cartTotal = sum of price x quantity
-  );
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   //    7f. Return the Provider with all of the above as value, wrapping children
   return (
     <CartContext.Provider
