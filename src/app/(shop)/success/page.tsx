@@ -10,7 +10,7 @@ export default function SuccessPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-4xl border border-gray-200 rounded-lg p-6 shadow-md text-center mt-20">
+    <div className="mx-auto max-w-4xl border border-gray-200 rounded-lg p-6 shadow-md text-center mt-20 bg-white">
       <h1 className="font-bold text-2xl mt-8"> Thank you!</h1>
       <p className="text-lg m-6">
         Your order is confirmed. You will receive a confirmation on your email.
