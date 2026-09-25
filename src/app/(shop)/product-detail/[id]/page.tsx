@@ -18,7 +18,7 @@ export default async function ProductDetailPage({
     `https://v2.api.noroff.dev/online-shop/${productId}`,
     {
       next: { revalidate: 3600 },
-    },
+    }
   );
 
   if (!response.ok) {
@@ -28,7 +28,7 @@ export default async function ProductDetailPage({
     }
     console.error(
       `Failed to fetch product ${productId}: `,
-      response.statusText,
+      response.statusText
     );
     return <p>Could not fetch product data. Try again later.</p>;
   }
@@ -95,7 +95,7 @@ export default async function ProductDetailPage({
         <div className="mt-8 border-t border-gray-200 pt-6">
           <h2 className="mb-4 text-lg font-semibold">Reviews:</h2>
           {!product.reviews || product.reviews.length === 0 ? (
-            <p className="rounded-lg bg-gray-50 p-4 text-center text-lg">
+            <p className="rounded-lg bg-gray-50 p-4 text-black text-center text-lg">
               No reviews yet.
             </p>
           ) : (
