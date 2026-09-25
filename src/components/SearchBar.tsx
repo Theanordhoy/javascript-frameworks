@@ -24,7 +24,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <input
         id="search"
         type="text"
-        className="p-2 border border-gray-200 rounded-lg w-80 mb-6 ml-4 focus:outline-blue-700 cursor-pointer"
+        className="p-2 border border-gray-400 rounded-lg w-80 mb-6 ml-4 focus:outline-blue-700 cursor-pointer bg-white"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);

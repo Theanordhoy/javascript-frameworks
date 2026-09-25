@@ -8,9 +8,9 @@ export default function Header() {
   const { cartCount } = useCart();
 
   return (
-    <header className="border-b border-gray-200 py-4 px-6 flex justify-between items-center">
+    <header className="py-4 px-6 flex justify-between items-center">
       <div>
-        <p className="font-semibold">E&T</p>
+        <p className="font-semibold text-xl">E&T</p>
       </div>
       <nav className="flex items-center text-lg gap-6">
         <Link href="/" className="hover:text-gray-600">
@@ -20,7 +20,7 @@ export default function Header() {
           Contact
         </Link>{" "}
         <Link href="/cart" className="hover:text-gray-600">
-          <FontAwesomeIcon icon={faCartShopping} /> ({cartCount})
+          <FontAwesomeIcon icon={faCartShopping} /> {cartCount}
         </Link>
       </nav>
     </header>

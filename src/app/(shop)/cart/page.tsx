@@ -24,7 +24,7 @@ export default function CartPage() {
         {" "}
         &larr; Back to products{" "}
       </Link>
-      <div className="mx-auto max-w-4xl border border-gray-200 rounded-lg p-6 shadow-md">
+      <div className="mx-auto max-w-4xl border border-gray-200 rounded-lg p-6 shadow-md bg-white mt-10">
         <h1 className="text-center text-2xl font-bold mb-10 mt-8">Your Cart</h1>
         {cart.length === 0 ? (
           <p className="text-center mb-8 text-lg">Your cart is empty.</p>
@@ -104,7 +104,7 @@ export default function CartPage() {
                 </button>
                 <Link
                   href="/success"
-                  className="flex-1 rounded-lg bg-gray-800 border border-white px-6 py-3 text-center text-white hover:bg-black font-semibold cursor-pointer"
+                  className="flex-1 rounded-lg bg-black border border-white px-6 py-3 text-center text-white hover:bg-gray-900 font-semibold cursor-pointer"
                 >
                   Checkout
                 </Link>
