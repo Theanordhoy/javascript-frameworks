@@ -18,7 +18,7 @@ export default async function ProductDetailPage({
     `https://v2.api.noroff.dev/online-shop/${productId}`,
     {
       next: { revalidate: 3600 },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -28,7 +28,7 @@ export default async function ProductDetailPage({
     }
     console.error(
       `Failed to fetch product ${productId}: `,
-      response.statusText
+      response.statusText,
     );
     return <p>Could not fetch product data. Try again later.</p>;
   }
@@ -46,8 +46,8 @@ export default async function ProductDetailPage({
         {" "}
         &larr; Back to products{" "}
       </Link>
-      <div className="mx-auto max-w-2xl border border-gray-200 p-8 shadow-md rounded-lg">
-        <h1 className="mb-3 text-2xl font-bold text-center">{product.title}</h1>
+      <div className="mx-auto max-w-2xl border border-gray-200 p-8 shadow-md rounded-lg bg-white mt-10">
+        <h1 className="mb-6 text-2xl font-bold text-center">{product.title}</h1>
         <img
           src={product.image.url}
           alt={product.image.alt}

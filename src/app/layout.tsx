@@ -30,7 +30,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <CartProvider>
-        <body className="min-h-full flex flex-col">
+        <body className="min-h-screen flex flex-col bg-linear-to-b from-stone-200 via-slate-100 to-blue-50 bg-fixed">
           <Header />
           <main className="mx-auto w-full max-w-7xl px-4 py-8 min-h-screen">
             {children}

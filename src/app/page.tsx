@@ -25,8 +25,8 @@ export default async function ProductsPage(props: {
     (product) =>
       product.title.toLowerCase().includes(query.toLowerCase()) ||
       product.tags?.some((tag) =>
-        tag.toLowerCase().includes(query.toLowerCase())
-      )
+        tag.toLowerCase().includes(query.toLowerCase()),
+      ),
   );
 
   return (
@@ -35,7 +35,7 @@ export default async function ProductsPage(props: {
         <Search placeholder="Search products..." />
       </div>
 
-      <h1 className="mb-6 text-2xl font-bold text-center">Products</h1>
+      <h1 className="mb-10 text-2xl font-bold text-center">Products</h1>
 
       {filteredProducts && filteredProducts.length > 0 ? (
         <ul
@@ -44,17 +44,13 @@ export default async function ProductsPage(props: {
         >
           {filteredProducts.map((product) => {
             const discount = Math.round(
-              ((product.price - product.discountedPrice) / product.price) * 100
+              ((product.price - product.discountedPrice) / product.price) * 100,
             );
 
             return (
               <li
                 key={product.id}
-                style={{
-                  marginBottom: "20px",
-                  padding: "10px",
-                }}
-                className="border border-gray-200 rounded-lg shadow-md"
+                className="border border-gray-200 rounded-lg shadow-xl bg-white px-5 py-4"
               >
                 <h2 className="mb-2 font-semibold">{product.title}</h2>
                 <div className="relative">
@@ -100,7 +96,7 @@ export default async function ProductsPage(props: {
                 </div>
                 <Link
                   href={`/product-detail/${product.id}`}
-                  className="bg-gray-800 border border-white p-2 rounded-lg text-white block text-center my-2 hover:bg-black"
+                  className="bg-black border border-white p-2 rounded-lg text-white block text-center my-2 hover:bg-gray-900"
                 >
                   See more
                 </Link>
